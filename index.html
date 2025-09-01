@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adam Malti Sobrino - Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <h1 class="logo">
+                <a href="#home" id="home-btn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                    </svg>
+                </a>
+            </h1>
+            <nav class="nav">
+                <a href="https://www.linkedin.com/in/adam-malti-sobrino-5b199a214/" target="_blank" class="nav-link linkedin-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                </a>
+                <a href="https://github.com/admsdev98" target="_blank" class="nav-link github-link">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </a>
+                <button class="theme-toggle" id="theme-toggle">
+                    💡
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="main-container view-home">
+        <!-- Home Section (Centro) -->
+        <div id="home" class="screen screen-center active">
+            <div class="section-content">
+                <div class="home-content">
+                    <h2 class="section-title">
+                        Hola, soy <span id="name-animation" class="name-text"></span><span id="name-cursor" class="cursor">|</span>
+                    </h2>
+                    <p class="section-description">
+                        Gracias por visitar mi portfolio. Espero que encuentres la respuesta que necesitas!
+                    </p>
+                    <div class="home-intro">
+                        <p>Navega por las diferentes secciones para saber mas sobre mi, mi experiencia o mis proyectos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Section (Izquierda) -->
+        <div id="about" class="screen screen-left">
+            <div class="section-content">
+                <div class="content">
+                    <h2 class="section-title">Sobre Mí</h2>
+                    <p class="main-description">
+                        Desarrollador Backend | Apasionado por la tecnología | Curioso por la IA
+                    </p>
+                    <div class="about-details">
+                        <!-- Enhanced Tech List -->
+                        <div class="tech-section">
+                            <div class="tech-line">
+                                <span class="tech-category">Tecnologías Backend</span>
+                                <span class="tech-items">Python, FastAPI, PHP, TypeScript</span>
+                            </div>
+                            <div class="tech-line">
+                                <span class="tech-category">Gestión de Datos</span>
+                                <span class="tech-items">MySQL, PostgreSQL, Redis</span>
+                            </div>
+                            <div class="tech-line">
+                                <span class="tech-category">Tambien he trabajado en menor medida con...</span>
+                                <span class="tech-items">Angular, MongoDB, RabbitMQ</span>
+                            </div>
+                        </div>
+
+                        <div class="content-block">
+                            <h3>Inteligencia Artificial</h3>
+                            <p>Estoy explorando la integración de IA en aplicaciones web. Trabajo principalmente con modelos de <span class="tech-stack">OpenAI y Claude</span> para el tratamiento de texto, imagen o voz, implementando sistemas que aprovechan embeddings y RAG para procesar información de forma inteligente.</p>
+                            <p>Tambien me apoyo en protocolos como <span class="tech-stack">MCP</span>, aprovechando las utilidades de los agentes y subagentes para dividir mis funcionalides y responsabilidades.</p>
+                        </div>
+
+                        <div class="content-block">
+                            <h3>Formación</h3>
+                            <p>Ciclo Superior de Desarrollo de Aplicaciones Web (2021)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Projects Section (Derecha) -->
+        <div id="projects" class="screen screen-right">
+            <div class="section-content">
+                <div class="content">
+                    <h2 class="section-title">Mis proyectos</h2>
+                    <p class="section-description">
+                        Aqui podrás ver los proyectos que he creado para practicar y poner en funcionamiento diferentes tecnologías.
+                    </p>
+                    <div class="projects-grid">
+                        <!-- Chatbot Project -->
+                        <div class="project-card chatbot-card">
+                            <div class="project-icon">
+                                <div class="chat-bubble">
+                                    <span class="chat-dots">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="project-info">
+                                <h3>WhoIsA Bot</h3>
+                                <p class="project-status live">🟢 En línea</p>
+                                <p class="project-description">
+                                    Chatbot inteligente con IA creado para preguntar dudas especificas sobre mi.
+                                </p>
+                                <a href="https://whoisa-bot.dev/" target="_blank" class="project-link">
+                                    Probar ahora →
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Tu NeveraAPP Project -->
+                        <div class="project-card nevera-card">
+                            <div class="project-icon">
+                                <div class="fridge-icon">
+                                    <div class="fridge-body">
+                                        <div class="fridge-handle"></div>
+                                        <div class="recipe-list">
+                                            <span></span>
+                                            <span></span>
+                                            <span></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="project-info">
+                                <h3>Tu NeveraAPP</h3>
+                                <p class="project-description">
+                                    Genera recetas y menús semanales basados en lo que tienes en tu nevera, despensa o ticket de la compra.
+                                </p> 
+                                <p class="project-status development">🔧 En desarrollo - 60%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Experience Section (Abajo) -->
+        <div id="experience" class="screen screen-bottom">
+            <div class="section-content">
+                <div class="content">
+                    <h2 class="section-title">Experiencia</h2>
+                    <div class="experience-grid">
+                        <!-- Primera experiencia -->
+                        <div class="experience-card">
+                            <div class="exp-header">
+                                <div class="exp-date">Sep 2021 - Mar 2025</div>
+                                <div class="exp-title">Developer</div>
+                                <div class="exp-company">Funiglobal</div>
+                            </div>
+                            <div class="exp-summary">
+                                Desarrollo e integración de soluciones web y backend, conectando APIs y gestionando datos.
+                            </div>
+                            <div class="exp-skills">
+                                <span class="exp-tag">PHP</span>
+                                <span class="exp-tag">Python</span>
+                                <span class="exp-tag">TypeScript</span>
+                                <span class="exp-tag">Redis</span>
+                                <span class="exp-tag">MySQL</span>
+                                <span class="exp-tag">PostgreSQL</span>
+                            </div>
+                        </div>
+
+                        <!-- Segunda experiencia -->
+                        <div class="experience-card">
+                            <div class="exp-header">
+                                <div class="exp-date">2025 - Actualidad</div>
+                                <div class="exp-title">Soporte Técnico N2/N3</div>
+                                <div class="exp-company">Bahía Software</div>
+                            </div>
+                            <div class="exp-summary">
+                                Resolución de incidencias técnicas de segundo y tercer nivel proporcionando soporte especializado.
+                            </div>
+                            <div class="exp-skills">
+                                <span class="exp-tag">MySQL</span>
+                                <span class="exp-tag">MongoDB</span>
+                                <span class="exp-tag">Python (scripting)</span>
+                            </div>
+                        </div>
+
+                        <!-- Tercera experiencia -->
+                        <div class="experience-card">
+                            <div class="exp-header">
+                                <div class="exp-date">2025</div>
+                                <div class="exp-title">A-Bot</div>
+                                <div class="exp-company">Proyecto Personal</div>
+                            </div>
+                            <div class="exp-summary">
+                                Chatbot personalizado para aclarar dudas sobre mí. Sistema de RAG y modelos de OpenAI.
+                            </div>
+                            <div class="exp-skills">
+                                <span class="exp-tag">Python</span>
+                                <span class="exp-tag">FastAPI</span>
+                                <span class="exp-tag">Streamlit</span>
+                                <span class="exp-tag">RAG</span>
+                                <span class="exp-tag">Modelos de OpenAI vía API</span>
+                                <span class="exp-tag">Modelos de Ollama en local</span>
+                            </div>
+                        </div>
+
+                        <!-- Cuarta experiencia -->
+                        <div class="experience-card">
+                            <div class="exp-header">
+                                <div class="exp-date">2025</div>
+                                <div class="exp-title">Tu NeveraAPP</div>
+                                <div class="exp-company">Proyecto Personal</div>
+                            </div>
+                            <div class="exp-summary">
+                                Genera recetas basadas en ingredientes disponibles vía voz, audio o imagen usando IA.
+                            </div>
+                            <div class="exp-skills">
+                                <span class="exp-tag">Python</span>
+                                <span class="exp-tag">FastAPI</span>
+                                <span class="exp-tag">React</span>
+                                <span class="exp-tag">Tailwind</span>
+                                <span class="exp-tag">Modelos de OpenAI vía API</span>
+                                <span class="exp-tag">Supabase</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Navigation Arrows -->
+    <div class="navigation-arrows">
+        <!-- Flechas para HOME -->
+        <div class="home-arrows">
+            <button class="nav-arrow left-arrow" onclick="navigateToAbout()">
+                <span>←</span>
+            </button>
+            <button class="nav-arrow right-arrow" onclick="navigateToProjects()">
+                <span>→</span>
+            </button>
+            <button class="nav-arrow down-arrow" onclick="navigateToExperience()">
+                <span>↓</span>
+            </button>
+        </div>
+        
+        <!-- Flecha de vuelta para ABOUT (viene desde la izquierda) -->
+        <div class="back-arrows about-back">
+            <button class="nav-arrow return-arrow" onclick="navigateToHome()">
+                <span>→</span>
+            </button>
+        </div>
+        
+        <!-- Flecha de vuelta para PROJECTS (viene desde la derecha) -->
+        <div class="back-arrows projects-back">
+            <button class="nav-arrow return-arrow" onclick="navigateToHome()">
+                <span>←</span>
+            </button>
+        </div>
+        
+        <!-- Flecha de vuelta para EXPERIENCE (viene desde abajo) -->
+        <div class="back-arrows experience-back">
+            <button class="nav-arrow return-arrow" onclick="navigateToHome()">
+                <span>↑</span>
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
