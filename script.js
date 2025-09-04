@@ -47,6 +47,85 @@ function toggleTimelineDetail(btn) {
 }
 // Estado de la aplicación
 let currentSection = 'home';
+let isClassicMode = true;
+
+// Toggle entre modo dinámico y clásico
+function toggleMode() {
+    isClassicMode = !isClassicMode;
+    const body = document.body;
+    const modeToggle = document.getElementById('mode-toggle');
+    const toggleText = modeToggle.querySelector('.toggle-text');
+    
+    if (isClassicMode) {
+        body.classList.add('classic-mode');
+        modeToggle.classList.add('active');
+        toggleText.textContent = 'Modo Clásico';
+        
+        // Smooth scroll para enlaces en modo clásico
+        setupClassicNavigation();
+    } else {
+        body.classList.remove('classic-mode');
+        modeToggle.classList.remove('active');
+        toggleText.textContent = 'Modo Dinámico';
+        
+        // Volver al estado inicial del modo dinámico
+        navigateToHome();
+    }
+    
+    // Guardar preferencia
+    localStorage.setItem('portfolioMode', isClassicMode ? 'classic' : 'dynamic');
+}
+
+// Configurar navegación para modo clásico
+function setupClassicNavigation() {
+    // Remover event listeners anteriores para evitar duplicados
+    document.querySelectorAll('.classic-nav .nav-link, .home-link').forEach(link => {
+        const newLink = link.cloneNode(true);
+        link.parentNode.replaceChild(newLink, link);
+    });
+    
+    // Agregar nuevos event listeners
+    document.querySelectorAll('.classic-nav .nav-link, .home-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const href = this.getAttribute('href');
+            if (href && href.startsWith('#')) {
+                const targetId = href.substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            }
+        });
+    });
+}
+
+// Cargar preferencia de modo al iniciar
+function loadModePreference() {
+    const savedMode = localStorage.getItem('portfolioMode');
+    
+    // Si la preferencia guardada es diferente al modo por defecto (clásico), cambiar
+    if (savedMode === 'dynamic') {
+        // Cambiar a dinámico ya que por defecto es clásico
+        toggleMode();
+    }
+    // Si no hay preferencia o es 'classic', ya está en modo clásico por defecto
+}
+
+// Inicializar modo clásico por defecto
+function initializeClassicMode() {
+    const body = document.body;
+    const modeToggle = document.getElementById('mode-toggle');
+    const toggleText = modeToggle.querySelector('.toggle-text');
+    
+    body.classList.add('classic-mode');
+    modeToggle.classList.add('active');
+    toggleText.textContent = 'Modo Clásico';
+    setupClassicNavigation();
+}
 
 // Elementos del DOM
 const mainContainer = document.querySelector('.main-container');
@@ -64,17 +143,7 @@ let isAnimating = false;
 // Estado para controlar si la animación ya se ejecutó
 let hasAnimationRun = false;
 
-// Inicialización
-document.addEventListener('DOMContentLoaded', function() {
-    initializeTheme();
-    updateBodyClass();
-    updateContainerPosition();
-    
-    // Iniciar animación del nombre después de un breve delay
-    setTimeout(() => {
-        startNameAnimation();
-    }, 2000);
-});
+
 
 // Animación del nombre
 function startNameAnimation() {
@@ -166,12 +235,7 @@ function toggleTheme() {
     setTheme(newTheme);
 }
 
-// Event listeners
-themeToggle.addEventListener('click', toggleTheme);
-homeBtn.addEventListener('click', function(e) {
-    e.preventDefault();
-    navigateToHome();
-});
+
 
 // Función principal de navegación
 function navigateToSection(sectionId) {
@@ -242,7 +306,11 @@ function navigateToHome() {
 
 // Navegación con teclado
 document.addEventListener('keydown', function(e) {
+    // Solo funcionar en modo dinámico
+    if (isClassicMode) return;
+    
     switch(e.key) {
+        // Flechas del teclado
         case 'ArrowLeft':
             e.preventDefault();
             if (currentSection === 'home') {
@@ -268,6 +336,39 @@ document.addEventListener('keydown', function(e) {
         case 'ArrowUp':
             e.preventDefault();
             if (currentSection === 'experience') {
+                navigateToHome();
+            }
+            break;
+        // Teclas WASD
+        case 'w':
+        case 'W':
+            e.preventDefault();
+            if (currentSection === 'experience') {
+                navigateToHome();
+            }
+            break;
+        case 'a':
+        case 'A':
+            e.preventDefault();
+            if (currentSection === 'home') {
+                navigateToAbout();
+            } else if (currentSection === 'projects') {
+                navigateToHome();
+            }
+            break;
+        case 's':
+        case 'S':
+            e.preventDefault();
+            if (currentSection === 'home') {
+                navigateToExperience();
+            }
+            break;
+        case 'd':
+        case 'D':
+            e.preventDefault();
+            if (currentSection === 'home') {
+                navigateToProjects();
+            } else if (currentSection === 'about') {
                 navigateToHome();
             }
             break;
@@ -297,4 +398,55 @@ document.addEventListener('mousemove', function(e) {
             card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateZ(0px)';
         }
     });
+});
+
+// Inicialización
+document.addEventListener('DOMContentLoaded', function() {
+    // Inicializar modo clásico por defecto
+    initializeClassicMode();
+    
+    // Cargar preferencia de modo (puede cambiar el modo si está guardado como dinámico)
+    loadModePreference();
+    
+    // Event listener para toggle de modo
+    const modeToggle = document.getElementById('mode-toggle');
+    if (modeToggle) {
+        modeToggle.addEventListener('click', toggleMode);
+    }
+    
+    // Inicializar otras funcionalidades
+    initializeTheme();
+    updateBodyClass();
+    updateContainerPosition();
+    
+    // Event listener para botón home
+    const homeBtn = document.getElementById('home-btn');
+    if (homeBtn) {
+        homeBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (!isClassicMode) {
+                navigateToHome();
+            } else {
+                // En modo clásico, hacer scroll al home
+                const homeElement = document.getElementById('home');
+                if (homeElement) {
+                    homeElement.scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            }
+        });
+    }
+    
+    // Event listener para toggle de tema
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', toggleTheme);
+    }
+    
+    // Iniciar animación del nombre después de un breve delay
+    setTimeout(() => {
+        startNameAnimation();
+    }, 2000);
 });
