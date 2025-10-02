@@ -309,6 +309,18 @@
         order: 2.7;
     }
 }
+
+/* Header colapsable mobile */
+@media (max-width: 768px) {
+    .header { transition: height .28s ease, background .25s ease, box-shadow .25s ease; }
+    .header:not(.condensed) { height:70px; }
+    .header.condensed { height:46px; box-shadow:0 4px 14px var(--shadow); background: rgba(0,0,0,0.55); backdrop-filter: blur(10px); }
+    .header.condensed .header-content { padding: 0.25rem 0.8rem; }
+    .header.condensed .hamburger { transform: scale(.9); }
+    .header.condensed .nav-home svg { width:22px; height:22px; }
+    /* Asegurar que el menú desplegado empuje desde el header reducido */
+    .header.condensed + .main-container .classic-nav.show { top:46px; }
+}
 /* About Me Section Styles */
 .about-details {
     margin-top: 2rem;
@@ -1131,6 +1143,13 @@ body.classic-mode .main-container {
     display: block;
 }
 
+/* Forzar modo clásico en mobile ocultando elementos dinámicos */
+@media (max-width: 768px) {
+    body:not(.classic-mode) .main-container { display: block; position: static; width: 100%; height: auto; transform: none; }
+    body:not(.classic-mode) .screen { position: static; width: 100%; height: auto; padding: 3.5rem 1rem 2rem; min-height: auto; }
+    body:not(.classic-mode) .navigation-arrows, body:not(.classic-mode) .control-indicators { display: none !important; }
+}
+
 body.classic-mode .screen {
     position: static;
     width: 100%;
@@ -1199,6 +1218,66 @@ body.classic-mode #projects {
     .nav-right .link-text {
         display: none !important;
     }
+}
+
+/* --- Menú Hamburguesa --- */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    padding: 6px 8px;
+    transition: all .3s ease;
+}
+.hamburger span { height: 2px; width: 100%; background: var(--text-color); border-radius: 2px; transition: all .3s ease; }
+.hamburger:hover { border-color: var(--accent-color); background: var(--accent-color-alpha); }
+.hamburger.active span:nth-child(1){ transform: translateY(6px) rotate(45deg); }
+.hamburger.active span:nth-child(2){ opacity:0; }
+.hamburger.active span:nth-child(3){ transform: translateY(-6px) rotate(-45deg); }
+
+/* Navegación móvil desplegable */
+@media (max-width: 768px){
+    .hamburger { display:flex; order:2; }
+    .classic-nav { position: fixed; top:60px; left:0; right:0; background: var(--bg-color); flex-direction: column; padding: 1rem 1.25rem 1.5rem; gap:.75rem; border-bottom:1px solid var(--border-color); display:none !important; animation: fadeDown .25s ease; }
+    .classic-nav.show { display:flex !important; }
+    .classic-nav .nav-link { width:100%; justify-content:flex-start; font-size:.9rem; padding:.6rem .75rem; border-radius:6px; }
+    .classic-nav .nav-link:active { background: var(--accent-color-alpha); }
+    body.classic-mode #home { padding-top:1rem; }
+}
+
+@media (max-width:480px){
+    .classic-nav { top:70px; }
+}
+
+@keyframes fadeDown { from { opacity:0; transform: translateY(-8px);} to { opacity:1; transform: translateY(0);} }
+
+/* Botones sociales mejorados en mobile */
+@media (max-width: 768px){
+    .nav-right { position: fixed; bottom: 14px; right: 14px; flex-direction: column; gap:.6rem; background: transparent; padding:0; border:none; border-radius:0; box-shadow:none; }
+    .nav-right .nav-link { padding:.45rem; border-radius:10px; }
+    .theme-toggle { width:38px; height:38px; display:flex; align-items:center; justify-content:center; }
+    /* Ocultar mode toggle completamente */
+    #mode-toggle { display:none !important; }
+}
+
+@media (max-width:480px){
+    .nav-right { flex-direction: row; left:50%; transform:translateX(-50%); right:auto; bottom:12px; padding:0; }
+}
+
+/* Ajustes de espaciado en mobile para secciones */
+@media (max-width:768px){
+    body.classic-mode .screen { padding: 4.5rem 1.1rem 2rem; }
+    .section-title { font-size:2rem; }
+}
+@media (max-width:480px){
+    body.classic-mode .screen { padding: 4.8rem .9rem 2.2rem; }
+    .section-title { font-size:1.7rem; }
 }
 
 /* Main Container */

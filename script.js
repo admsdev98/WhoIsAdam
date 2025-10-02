@@ -127,6 +127,85 @@ function initializeClassicMode() {
     setupClassicNavigation();
 }
 
+// Forzar modo clásico en mobile siempre y ocultar toggle si se desea en futuro
+function enforceMobileClassicMode(){
+    const width = window.innerWidth;
+    if(width <= 768){
+        if(!document.body.classList.contains('classic-mode')){
+            // Si estaba en dinámico lo cambiamos
+            if(!isClassicMode){ toggleMode(); }
+        }
+    // Toggle oculto vía CSS, no se necesita desactivar
+    } else {
+        const modeToggle = document.getElementById('mode-toggle');
+        if(modeToggle){ modeToggle.removeAttribute('disabled'); modeToggle.style.opacity = 1; modeToggle.style.pointerEvents='auto'; }
+    }
+}
+
+// Hamburguesa
+function setupHamburger(){
+    const hamburger = document.getElementById('hamburger');
+    const classicNav = document.getElementById('classic-nav');
+    if(!hamburger || !classicNav) return;
+    hamburger.addEventListener('click', ()=>{
+        const expanded = hamburger.getAttribute('aria-expanded') === 'true';
+        hamburger.setAttribute('aria-expanded', String(!expanded));
+        hamburger.classList.toggle('active');
+        classicNav.classList.toggle('show');
+    });
+    // Cerrar menú al hacer click en un enlace
+    classicNav.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', ()=>{
+            if(window.innerWidth <= 768){
+                classicNav.classList.remove('show');
+                hamburger.classList.remove('active');
+                hamburger.setAttribute('aria-expanded','false');
+            }
+        });
+    });
+    // Cerrar al hacer click fuera
+    document.addEventListener('click', (e)=>{
+        if(window.innerWidth > 768) return;
+        if(!classicNav.contains(e.target) && !hamburger.contains(e.target)){
+            classicNav.classList.remove('show');
+            hamburger.classList.remove('active');
+            hamburger.setAttribute('aria-expanded','false');
+        }
+    });
+}
+
+// Header colapsable en mobile
+function setupCollapsibleHeader(){
+    const header = document.querySelector('.header');
+    if(!header) return;
+    let lastScroll = 0;
+    let ticking = false;
+    function onScroll(){
+        const y = window.scrollY || document.documentElement.scrollTop;
+        const goingDown = y > lastScroll;
+        if(window.innerWidth <= 768){
+            if(y > 50 && goingDown){
+                header.classList.add('condensed');
+            } else if(!goingDown || y < 10){
+                header.classList.remove('condensed');
+            }
+        } else {
+            header.classList.remove('condensed');
+        }
+        lastScroll = y <= 0 ? 0 : y;
+        ticking = false;
+    }
+    window.addEventListener('scroll', ()=>{
+        if(!ticking){
+            window.requestAnimationFrame(onScroll);
+            ticking = true;
+        }
+    }, { passive:true });
+    window.addEventListener('resize', ()=>{
+        if(window.innerWidth > 768){ header.classList.remove('condensed'); }
+    });
+}
+
 // Elementos del DOM
 const mainContainer = document.querySelector('.main-container');
 const themeToggle = document.getElementById('theme-toggle');
@@ -413,6 +492,13 @@ document.addEventListener('DOMContentLoaded', function() {
     if (modeToggle) {
         modeToggle.addEventListener('click', toggleMode);
     }
+
+    // Configurar hamburguesa
+    setupHamburger();
+    setupCollapsibleHeader();
+    // Forzar modo clásico en mobile al cargar
+    enforceMobileClassicMode();
+    window.addEventListener('resize', enforceMobileClassicMode);
     
     // Inicializar otras funcionalidades
     initializeTheme();
