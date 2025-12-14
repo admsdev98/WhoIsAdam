@@ -493,6 +493,26 @@ h6 {
     color: var(--text-secondary);
 }
 
+.projects-disclaimer {
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.projects-disclaimer svg {
+    flex-shrink: 0;
+    color: var(--accent-primary);
+}
+
 /* Experience Section */
 .timeline {
     position: relative;
